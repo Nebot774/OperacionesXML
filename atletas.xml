@@ -1,0 +1,37 @@
+<ArrayList>
+  <item>
+    <nombre>carla</nombre>
+    <prueba>
+      <prueba>Baile</prueba>
+    </prueba>
+    <edad>18</edad>
+    <pais>España</pais>
+  </item>
+  <item>
+    <nombre>rocio</nombre>
+    <prueba>
+      <prueba>natacion</prueba>
+      <prueba>senderismo</prueba>
+    </prueba>
+    <edad>15</edad>
+    <pais>India</pais>
+  </item>
+  <item>
+    <nombre>alejandra</nombre>
+    <prueba>
+      <prueba>natacion</prueba>
+      <prueba>crossfit</prueba>
+    </prueba>
+    <edad>23</edad>
+    <pais>Portugal</pais>
+  </item>
+  <item>
+    <nombre>elena</nombre>
+    <prueba>
+      <prueba>natacion</prueba>
+      <prueba>crossfit</prueba>
+    </prueba>
+    <edad>23</edad>
+    <pais>Portugal</pais>
+  </item>
+</ArrayList>

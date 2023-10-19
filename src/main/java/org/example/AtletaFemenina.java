@@ -15,6 +15,11 @@ public class AtletaFemenina {
         this.pais = pais;
     }
 
+    public AtletaFemenina() {
+        // Constructor sin argumentos
+    }
+
+
     public String getNombre() {
         return nombre;
     }

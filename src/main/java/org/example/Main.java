@@ -1,6 +1,9 @@
 package org.example;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -9,7 +12,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         List<AtletaFemenina> atletas=new ArrayList<>();
 
@@ -25,16 +28,17 @@ public class Main {
         AtletaFemenina atleta2=new AtletaFemenina("rocio",pruebas2,15,"India");
 
         List<String> pruebas3=new ArrayList<>();
-        pruebas2.add("natacion");
-        pruebas2.add("crossfit");
+        pruebas3.add("natacion");
+        pruebas3.add("crossfit");
 
         AtletaFemenina atleta3=new AtletaFemenina("alejandra",pruebas3,23,"Portugal");
 
         List<String> pruebas4=new ArrayList<>();
-        pruebas2.add("natacion");
-        pruebas2.add("crossfit");
+        pruebas4.add("natacion");
+        pruebas4.add("baile");
+        pruebas4.add("crossfit");
 
-        AtletaFemenina atleta4=new AtletaFemenina("alejandra",pruebas3,23,"Portugal");
+        AtletaFemenina atleta4=new AtletaFemenina("elena",pruebas3,23,"Portugal");
 
         atletas.add(atleta1);
         atletas.add(atleta2);
@@ -43,7 +47,30 @@ public class Main {
 
 
         System.out.println("\n**** Escritura de objeto XML por consola ****");
-        System.out.println(escribirXMLdeAtletas(atletas));
+        String xml=escribirXMLdeAtletas(atletas);
+        System.out.println(xml);
+
+        //guardamos el XML en un archivo
+        try(FileWriter writer=new FileWriter("C:\\Users\\Adria\\IdeaProjects\\atletas.xml")){
+            writer.write(xml);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        String ruta="atletas.xml";
+
+        //creamos un path
+        Path path= Paths.get(ruta);
+
+
+        //llamamos al metodo convertirXmlaObjeto para que convierta el XML a un objeto atletas femeninas
+        //lo almazenamos en una lista de tipo atleta femenina
+        List<AtletaFemenina> atletasConversion= convertirXmlaObjeto(path);
+        System.out.println("\n**** Resultado de convertir un XML a un array de objetos****");
+        String xml2=escribirXMLdeAtletas(atletasConversion);
+        System.out.println(xml2);
+
+
 
     }
 
@@ -64,5 +91,22 @@ public class Main {
             throw new RuntimeException(e);
         }
     }
+
+    //Crea un método que extraiga una lista de objetos AtletaFemenina a partir de un archivo XML.
+    public static  List<AtletaFemenina> convertirXmlaObjeto(Path ruta){
+        try {
+            XmlMapper xmlMapper=new XmlMapper();
+            return xmlMapper.readValue(ruta.toFile(), new TypeReference<>() { });
+
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+
+
 
 }
