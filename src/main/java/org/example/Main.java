@@ -2,6 +2,7 @@ package org.example;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -50,17 +51,16 @@ public class Main {
         String xml=escribirXMLdeAtletas(atletas);
         System.out.println(xml);
 
-        //guardamos el XML en un archivo
-        try(FileWriter writer=new FileWriter("C:\\Users\\Adria\\IdeaProjects\\atletas.xml")){
-            writer.write(xml);
-        }catch (IOException e){
+        // Guardamos el XML en un archivo usando nio
+        Path path = Paths.get("C:\\Users\\Adria\\IdeaProjects\\atletas.xml");
+        try {
+            Files.write(path, xml.getBytes());
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
-        String ruta="atletas.xml";
 
-        //creamos un path
-        Path path= Paths.get(ruta);
+
 
 
         //llamamos al metodo convertirXmlaObjeto para que convierta el XML a un objeto atletas femeninas
